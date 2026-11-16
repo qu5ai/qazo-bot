@@ -1,38 +1,36 @@
 from PIL import Image, ImageDraw, ImageFont
 import os
 
-def generate_qazo_thumbnail(title_text, output_path="qazo_thumb.png"):
-    # مقاسات يوتيوب القياسية للصور المصغرة (1280x720)
+def generate_qazo_thumbnail(title_text, category_label="التحليلي", output_path="qazo_thumb.png"):
+    # مقاسات يوتيوب القياسية للصورة المصغرة (1280x720)
     width, height = 1280, 720
     
-    # إنشاء خلفية داكنة وجذابة تناسب الجيمنج (تدرج لوني أو لون داكن فخم)
-    image = Image.new("RGB", (width, height), color=(15, 15, 25))
+    # خلفية داكنة وفخمة تتماشى مع جو القناة
+    image = Image.new("RGB", (width, height), color=(20, 20, 30))
     draw = ImageDraw.Draw(image)
     
-    # رسم إطار أو لمسة جمالية في الخلفية لزيادة الحيوية
-    draw.rectangle([30, 30, width - 30, height - 30], outline=(0, 204, 255), width=6)
-    
-    # إضافة نص العنوان (ملاحظة: ليدعم الخط العربي بشكل مثالي على السيرفر، يفضل استخدام ملف خط TTF مثل Amiri أو Cairo)
-    font_path = "Cairo-Bold.ttf"  # تأكد من توفر ملف الخط في المشروع، أو استخدم الخط الافتراضي
+    # تحميل الخط العربي المخصص (Cairo-Bold) لتطابق نفس ستايل صورك
+    font_path = "Cairo-Bold.ttf"
     try:
-        font = ImageFont.truetype(font_path, 65)
+        title_font = ImageFont.truetype(font_path, 70)
+        label_font = ImageFont.truetype(font_path, 50)
     except IOError:
-        font = ImageFont.load_default()
+        title_font = ImageFont.load_default()
+        label_font = ImageFont.load_default()
         
-    # تقسيم النص وتنسيقه ليظهر بمنتصف الصورة
-    # (يمكننا إضافة معالجة النصوص العربية وعكسها إذا لزم الأمر لتظهر الحروف متصلة بشكل صحيح)
-    text_color = (255, 255, 255)
+    # رسم شريط علوي أو خلفية للعنوان مثل تصاميمك
+    draw.rectangle([0, 0, width, 100], fill=(255, 255, 255))
     
-    # رسم شريط خلف النص لزيادة الوضوح
-    draw.rectangle([80, 420, width - 80, 600], fill=(0, 0, 0, 180))
+    # كتابة التصنيف العلوي (مثل: التحليلي، القيادي، المسالم) بنفس مكانها
+    # ملاحظة: يمكنك عكس النص لو ظهر مقلوباً حسب مكتبة المعالجة لديك
+    draw.text((width // 2 - 100, 20), category_label, fill=(0, 0, 0), font=label_font)
     
-    # كتابة العنوان على الصورة
-    draw.text((100, 450), title_text, fill=text_color, font=font)
+    # كتابة العنوان الرئيسي في منتصف الصورة
+    draw.text((100, 450), title_text, fill=(255, 255, 255), font=title_font)
     
-    # حفظ الصورة الناتجة
+    # حفظ الصورة المصغرة النهائية
     image.save(output_path)
-    print(f"تم بنجاح توليد الصورة المصغرة وحفظها في: {output_path}")
+    print(f"تم إنشاء الصورة المصغرة المطابقة لهوية Qazo وحفظها في: {output_path}")
 
 if __name__ == "__main__":
-    # تجربة توليد صورة بعنوان افتراضي
-    generate_qazo_thumbnail("كيف تحترف برمجة الألعاب في 2026؟")
+    generate_qazo_thumbnail("كيف تطور أسلوب لعبك في ثواني؟", "التحليلي")
