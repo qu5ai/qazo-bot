@@ -1,64 +1,68 @@
-import datetime
-import random
+name: Qazo Full Automation Suite
 
-print("🚀 [Qazo Ultimate Suite]: جاري تشغيل منظومة البوتات الـ 8 أوتوماتيكياً...")
+on:
+  schedule:
+    - cron: '0 18 * * 4,5'
+  workflow_dispatch:
 
-# 1. بوت البحث والتسريبات (The Trend Scout & Series Agent)
-def trend_scout_agent():
-    database = {
-        "secrets": "سر مرعب اكتشفه اللاعبون في أعمق خرائط روكت ليق بعد 5 سنين!",
-        "top10": "توب 10 ألعاب دمرها الغش وأثارت جنون اللاعبين",
-        "breaking_leaks": "🚨 تسريب حصري وطازج: تفاصيل نارية عن اللعبة المنتظرة تتكشف الآن!"
-    }
-    category = random.choice(list(database.keys()))
-    topic = database[category]
-    return category, topic
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-# 2. بوت التدقيق الأخلاقي والديني (The Ethics Guardrail - حلال 100%)
-def ethics_guardrail_agent(text):
-    forbidden_words = ["عنف", "مخل", "قمار", "مراهنات", "غير لائق", "إيحاء"]
-    for word in forbidden_words:
-        if word in text:
-            return False
-    return True
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
 
-# 3. بوت العناوين والسيناريو (The Universal Hook & Script Agent)
-def hook_and_script_agent(topic):
-    hook = "🤯 لو قلت لك إن هذا الشيء صار قدام الكل ومحد انتبه له؟\n"
-    body = f"التفاصيل الحصرية: {topic}\n"
-    return hook + body
-
-# 4. بوت روابط العمولة الحلال (The Halal Affiliate Agent)
-def halal_affiliate_agent():
-    # روابط عمولة نظيفة ومباحة (أجهزة ومفاتيح ألعاب أصلية)
-    affiliate_link = "🛒 احصل على تجهيزاتك وألعابك الأصلية عبر روابط قازو المعتمدة (دعم حلال ومبارك)."
-    return affiliate_link
-
-# 5. بوت الجدولة والتوقيت الذكي (Peak Boredom & Timing Agent)
-def timing_and_scheduling_agent():
-    # جدولة منتظمة بدون سبام (مقطع بانتظام في وقت ذروة الإجازات والملل)
-    return "⏰ [الجدولة الذكية]: تم ضبط التوقيت بدقة (النشر في ذروة سهرة الخميس/الجمعة لضمان أقصى مشاهدات دون سبام)."
-
-# 6. التشغيل العام للمنظومة
-def run_full_qazo_system():
-    category, topic = trend_scout_agent()
-    print(f"\n📂 [نوع السلسلة]: {category.upper()}")
-    
-    if ethics_guardrail_agent(topic):
-        print("✅ [المدقق الأخلاقي]: اجتاز فحص الأمان والحلال بنجاح تام.")
-        
-        script = hook_and_script_agent(topic)
-        print(f"\n📝 [السيناريو المنتج ألياً]:\n{script}")
-        
-        affiliate = halal_affiliate_agent()
-        print(f"💰 [روابط العمولة]: {affiliate}")
-        
-        timing = timing_and_scheduling_agent()
-        print(timing)
-        
-        print("\n🚀 [حالة إمبراطورية قازو]: المنظومة تعمل بكفاءة تامة في السحابة وأنت مرتاح في دراستك!")
-    else:
-        print("❌ [إيقاف أمني]: تم رفض المحتوى لمخالفته المعايير.")
-
-if __name__ == "__main__":
-    run_full_qazo_system()
+      - name: Run Qazo Ultimate Suite
+        run: |
+          python -c '
+          import datetime
+          import random
+          
+          print("🚀 [Qazo Ultimate Suite]: جاري تشغيل منظومة البوتات الـ 8 أوتوماتيكياً...")
+          
+          def trend_scout_agent():
+              database = {
+                  "secrets": "سر مرعب اكتشفه اللاعبون في أعمق خرائط روكت ليق بعد 5 سنين!",
+                  "top10": "توب 10 ألعاب دمرها الغش وأثارت جنون اللاعبين",
+                  "breaking_leaks": "🚨 تسريب حصري وطازج: تفاصيل نارية عن اللعبة المنتظرة تتكشف الآن!"
+              }
+              category = random.choice(list(database.keys()))
+              topic = database[category]
+              return category, topic
+          
+          def ethics_guardrail_agent(text):
+              forbidden_words = ["عنف", "مخل", "قمار", "مراهنات", "غير لائق", "إيحاء"]
+              for word in forbidden_words:
+                  if word in text:
+                      return False
+              return True
+          
+          def hook_and_script_agent(topic):
+              hook = "🤯 لو قلت لك إن هذا الشيء صار قدام الكل ومحد انتبه له؟\n"
+              body = f"التفاصيل الحصرية: {topic}\n"
+              return hook + body
+          
+          def halal_affiliate_agent():
+              return "🛒 احصل على تجهيزاتك وألعابك الأصلية عبر روابط قازو المعتمدة (دعم حلال ومبارك)."
+          
+          def timing_and_scheduling_agent():
+              return "⏰ [الجدولة الذكية]: تم ضبط التوقيت بدقة (النشر في ذروة سهرة الخميس/الجمعة لضمان أقصى مشاهدات دون سبام)."
+          
+          category, topic = trend_scout_agent()
+          print(f"\n📂 [نوع السلسلة]: {category.upper()}")
+          
+          if ethics_guardrail_agent(topic):
+              print("✅ [المدقق الأخلاقي]: اجتاز فحص الأمان والحلال بنجاح تام.")
+              script = hook_and_script_agent(topic)
+              print(f"\n📝 [السيناريو المنتج ألياً]:\n{script}")
+              print(f"💰 [روابط العمولة]: {halal_affiliate_agent()}")
+              print(timing_and_scheduling_agent())
+              print("\n🚀 [حالة إمبراطورية قازو]: المنظومة تعمل بكفاءة تامة في السحابة وأنت مرتاح في دراستك!")
+          else:
+              print("❌ [إيقاف أمني]: تم رفض المحتوى.")
+          '
