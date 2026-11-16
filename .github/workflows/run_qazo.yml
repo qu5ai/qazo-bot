@@ -22,8 +22,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests pillow
 
-      - name: Run Qazo Bot Script
+      - name: Run Qazo Video Engine
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: |
-          python qazo_bot.py
+          python qazo_video_engine.py
