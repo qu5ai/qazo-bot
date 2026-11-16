@@ -1,4 +1,8 @@
 name: Qazo Full Autonomous Suite & Auto-Publisher
+on:
+  schedule:
+    - cron: '0 12 * * *'  # سيقوم بتشغيل البوت ونشر فيديو جديد تلقائياً كل يوم الساعة 12 ظهراً بتوقيت السيرفر
+  workflow_dispatch:      # يسمح لك أيضاً بالتشغيل اليدوي متى ما بغيت
 
 on:
   schedule:
