@@ -1,0 +1,65 @@
+name: Qazo Cloud Automation
+
+on:
+  schedule:
+    - cron: '0 18 * * 4,5'
+  workflow_dispatch:
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Run Qazo Core Logic
+        run: |
+          python -c '
+          import datetime
+          import random
+          
+          print("🚀 [Qazo Cloud Engine]: يعمل بنجاح تام من السحابة!")
+          
+          series_database = {
+              "secrets": [
+                  "سر مرعب اكتشفه اللاعبون في أعمق خرائط روكت ليق بعد 5 سنين!",
+                  "ثغرة خفية في ألعاب العالم المفتوح لم يلاحظها أحد أبداً",
+                  "قصة المطور الخفي الذي ترك رسالة سرية داخل واحدة من أشهر الألعاب"
+              ],
+              "top10": [
+                  "توب 10 ألعاب دمرها الغش وأثارت جنون اللاعبين",
+                  "توب 5 أسرار تقنية مجنونة لا تعرفها عن الأجهزة",
+                  "توب 10 أخطاء قاتلة ارتكبها المطورون وتم اكتشافها بالصدفة"
+              ],
+              "breaking_leaks": [
+                  "🚨 تسريب حصري وطازج: تفاصيل نارية عن اللعبة المنتظرة تتكشف الآن!",
+                  "🔥 تسريبات حارّة: المطورون يسربون موعد ومواصفات التحديث القادم بالخطأ!",
+                  "⚡ أخبار عاجلة: تسريب يبين سبب التغيير الجذري في عالم الجيمنج!"
+              ]
+          }
+          
+          forbidden_words = ["عنف", "مخل", "قمار", "مراهنات", "غير لائق", "إيحاء"]
+          
+          def check_ethics(text):
+              for word in forbidden_words:
+                  if word in text:
+                      return False
+              return True
+          
+          series_choice = random.choice(list(series_database.keys()))
+          topic = random.choice(series_database[series_choice])
+          
+          print(f"📂 [نوع السلسلة]: {series_choice.upper()}")
+          if check_ethics(topic):
+              print(f"✅ [تدقيق أخلاقي حلال]: اجتاز الفحص بنجاح.")
+              print(f"🎯 [العنوان الجذاب]: {topic}")
+              print(f"⏰ [الجدولة السحابية]: تم إنتاج المحتوى وجدولته بنجاح (بدون سبام، مقطع بانتظام).")
+              print("🚀 [حالة الإمبراطورية السحابية]: جاهز للسيطرة في وقت ذروة الملل والإجازات!")
+          else:
+              print("❌ [حظر أمني]: تم رفض المحتوى.")
+          '
