@@ -1,6 +1,6 @@
-import os
 import random
 from datetime import datetime
+from pathlib import Path
 
 # إعدادات روابط التسويق بالعمولة (Amazon Affiliate) ومواضيع Qazo
 AFFILIATE_LINK = "https://amzn.to/qazo_gaming"
@@ -41,10 +41,6 @@ def generate_dashboard():
         dashboard_content += "* رابط الثمنيل (الصورة المصغرة): [عرض الصورة](" + topic['thumbnail'] + ")\n"
         dashboard_content += "* رابط تحميل الفيديو المباشر: [تحميل ملف الفيديو (MP4)](" + topic['video_url'] + ")\n\n---\n"
 
-    with open("dashboard.md", "w", encoding="utf-8") as f:
-        f.write(dashboard_content)
-    
-    print("✨ تم تحديث لوحة تحكم Qazo بنجاح وجهزت مقطعين اليوم!")
-
-if __name__ == "__main__":
-    generate_dashboard()
+    # الكتابة المباشرة والمضمونة باستخدام Pathlib
+    file_path = Path("dashboard.md")
+    file_path.write_text(dashboard_content, encoding="utf
