@@ -1,6 +1,5 @@
 import os
 import random
-import requests
 from datetime import datetime
 
 # إعدادات روابط التسويق بالعمولة (Amazon Affiliate) ومواضيع Qazo
@@ -16,42 +15,35 @@ GAME_TOPICS = [
         "title": "توب 10 أخطاء مطورية في الألعاب تحولت لمزايا أسطورية عشقها اللاعبون! ⚡",
         "thumbnail": "https://img.youtube.com/vi/sample_thumb_2/maxresdefault.jpg",
         "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+    },
+    {
+        "title": "ليش هذا السر في لقطات الـ Rocket League غيّر موازين الاحتراف؟ 🚀",
+        "thumbnail": "https://img.youtube.com/vi/sample_thumb_3/maxresdefault.jpg",
+        "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4"
     }
 ]
 
-def generate_qazo_content():
-    # اختيار موضوع عشوائي بدون تكرار
-    topic = random.choice(GAME_TOPICS)
+def generate_dashboard():
+    # اختيار مقطعين عشوائيين لكل يوم (مرتين في اليوم)
+    selected_topics = random.sample(GAME_TOPICS, 2)
+    current_time = datetime.now().strftime('%Y-%m-%d | %I:%M %p')
     
-    title = f"{topic['title']} | #{datetime.now().strftime('%d%H')}"
-    description = f"استكشف معنا أسرار وخبايا الألعاب!\n\n🛒 أدوات وتجهيزات الجيمنز (رابط العمولة):\n- أفضل رخص ومعدات الألعاب: {AFFILIATE_LINK}"
-    thumbnail = topic['thumbnail']
-    video_url = topic['video_url']
-    
-    # تجهيز رسالة الواتساب المرتبة
-    whatsapp_message = (
-        f"🚨 *مقطع جديد جاهز للإمبراطورية يا قُصي!*\n\n"
-        f"📌 *العنوان:*\n{title}\n\n"
-        f"📝 *الوصف ورابط العمولة:*\n{description}\n\n"
-        f"🖼️ *رابط الثمنيل (الصورة المصغرة):*\n{thumbnail}\n\n"
-        f"🎬 *رابط تحميل الفيديو المباشر:*\n{video_url}"
-    )
-    
-    send_to_whatsapp(whatsapp_message)
+    # تصميم واجهة التطبيق/لوحة التحكم المرتبة
+    dashboard_content = f"""# 🎬 لوحة تحكم إمبراطورية Qazo
+> **آخر تحديث:** {current_time}  
+> **الحالة:** جاهز للنشر اليدوي الآمن 🚀
 
-def send_to_whatsapp(message):
-    # استخدام خدمة ويب هوك لإرسال الرسالة إلى واتسابك مباشرة
-    # (يمكنك استبدال الرابط برقمك وخدمة الويب هوك المفضلة لديك مثل CallMeBot المجانية)
-    phone_number = "YOUR_PHONE_NUMBER" # مثال: رقمك مع رمز الدولة
-    api_key = "YOUR_API_KEY"
-    
-    url = f"https://api.callmebot.com/whatsapp.php?phone={phone_number}&text={requests.utils.quote(message)}&apikey={api_key}"
-    
-    response = requests.get(url)
-    if response.status_code == 200:
-        print("✅ تم إرسال الحزمة الكاملة إلى واتساب قُصي بنجاح!")
-    else:
-        print(f"❌ فشل الإرسال للواتساب: {response.status_code}")
+---
+"""
 
-if __name__ == "__main__":
-    generate_qazo_content()
+    for i, topic in enumerate(selected_topics, 1):
+        title = f"{topic['title']} #Qazo"
+        description = f"استكشف معنا أسرار وخبايا الألعاب الاحترافية!\n\n🛒 أدوات وتجهيزات الجيمنز (رابط العمولة):\n- أفضل رخص ومعدات الألعاب: {AFFILIATE_LINK}"
+        
+        dashboard_content += f"""
+### 📌 المقطع رقم {i}
+* **العنوان المقترح:** 
+  > `{title}`
+* **الوصف ورابط الأفلييت:**
+  ```text
+  {description}
