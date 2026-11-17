@@ -29,21 +29,10 @@ def generate_dashboard():
     current_time = datetime.now().strftime('%Y-%m-%d | %I:%M %p')
     
     # تصميم واجهة التطبيق/لوحة التحكم المرتبة
-    dashboard_content = f"""# 🎬 لوحة تحكم إمبراطورية Qazo
-> **آخر تحديث:** {current_time}  
-> **الحالة:** جاهز للنشر اليدوي الآمن 🚀
-
----
-"""
+    dashboard_content = "# 🎬 لوحة تحكم إمبراطورية Qazo\n"
+    dashboard_content += f"> **آخر تحديث:** {current_time}  \n"
+    dashboard_content += "> **الحالة:** جاهز للنشر اليدوي الآمن 🚀\n\n---\n"
 
     for i, topic in enumerate(selected_topics, 1):
         title = f"{topic['title']} #Qazo"
-        description = f"استكشف معنا أسرار وخبايا الألعاب الاحترافية!\n\n🛒 أدوات وتجهيزات الجيمنز (رابط العمولة):\n- أفضل رخص ومعدات الألعاب: {AFFILIATE_LINK}"
-        
-        dashboard_content += f"""
-### 📌 المقطع رقم {i}
-* **العنوان المقترح:** 
-  > `{title}`
-* **الوصف ورابط الأفلييت:**
-  ```text
-  {description}
+        description = f"استكشف معنا أسرار وخ
