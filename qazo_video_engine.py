@@ -54,8 +54,8 @@ def search_and_get_affiliate_link(video_topic):
     return affiliate_block
 
 def send_to_cloud_automation(video_data):
-    # استبدل الرابط أدناه برابط الـ Webhook الخاص بك من Make.com
-    webhook_url = "https://hook.eu1.make.com/YOUR_UNIQUE_WEBHOOK_LINK_HERE"
+    # تم إدراج رابط الويب هوك الخاص بك هنا بشكل رسمي
+    webhook_url = "https://hook.eu1.make.com/xv1z7yzllh6pcey2eiq2c4avmdqflff1"
     
     headers = {'Content-Type': 'application/json'}
     
