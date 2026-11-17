@@ -1,5 +1,6 @@
 import random
 import requests
+import json
 
 def generate_bendia_style_script(topic):
     # مولد السيناريو بأسلوب بنديا (مقدمة خاطفة، سرد تحليلي، وخاتمة تترك أثراً)
@@ -25,7 +26,7 @@ def generate_bendia_style_script(topic):
     return script.strip()
 
 def search_and_get_affiliate_link(video_topic):
-    # البحث الذكي وجلب روابط الأفلييت أوتوماتيكياً
+    # البحث الذكي وجلب روابط الأفلييت أوتوماتيكياً حسب المحتوى
     affiliate_database = {
         "gaming": "https://amzn.to/qazo-gaming-pc-setup",
         "programming": "https://amzn.to/qazo-dev-tools",
@@ -52,23 +53,37 @@ def search_and_get_affiliate_link(video_topic):
     """
     return affiliate_block
 
-def publish_to_youtube(script, affiliate_desc):
-    print("جاري رفع الفيديو والصورة المصغرة (بخط Tajawal-Bold) إلى يوتيوب أوتوماتيكياً...")
-    # (هنا يتم استخدام YOUTUBE_API_KEY المعتمد في المستودع للنشر)
-    print("تم النشر على يوتيوب بنجاح! 🚀")
-
-def publish_to_instagram(caption_text):
-    print("جاري رفع الفيديو إلى انستغرام (Instagram Reels) أوتوماتيكياً...")
-    # (هنا يتم الاتصال بـ Instagram Graph API عبر التوكن المخزن في الـ Secrets)
-    print("تم النشر بنجاح على انستغرام! 📱✨")
+def send_to_cloud_automation(video_data):
+    # استبدل الرابط أدناه برابط الـ Webhook الخاص بك من Make.com
+    webhook_url = "https://hook.eu1.make.com/YOUR_UNIQUE_WEBHOOK_LINK_HERE"
+    
+    headers = {'Content-Type': 'application/json'}
+    
+    try:
+        response = requests.post(webhook_url, data=json.dumps(video_data), headers=headers)
+        if response.status_code == 200:
+            print("✨ تم إرسال حزمة بيانات Qazo إلى Make.com بنجاح!")
+        else:
+            print(f"فشل الإرسال، رمز الاستجابة: {response.status_code}")
+    except Exception as e:
+        print(f"خطأ في الاتصال بالأداة السحابية: {e}")
 
 if __name__ == "__main__":
     topic = "سر احتراف وهندسة الأنظمة البرمجية وعالم الألعاب"
     
-    print("1. توليد السيناريو...")
+    print("1. توليد السيناريو أوتوماتيكياً...")
     script = generate_bendia_style_script(topic)
     
-    print("2. جلب روابط الأفلييت...")
+    print("2. جلب روابط الأفلييت الذكية...")
     affiliate_desc = search_and_get_affiliate_link(topic)
     
-    print("3. بدء النشر التلقائي...")
+    # تجهيز حزمة البيانات وإرسالها للمنصات عبر Make.com
+    qazo_package = {
+        "title": topic,
+        "script": script,
+        "affiliate_link": affiliate_desc,
+        "video_file_url": "https://github.com/your-username/qazo-repo/raw/main/output_video.mp4"
+    }
+    
+    send_to_cloud_automation(qazo_package)
+    print("✨ تمت عملية الإنتاج والإرسال السحابي بالكامل!")
