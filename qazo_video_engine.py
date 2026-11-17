@@ -41,6 +41,11 @@ def generate_dashboard():
         dashboard_content += "* رابط الثمنيل (الصورة المصغرة): [عرض الصورة](" + topic['thumbnail'] + ")\n"
         dashboard_content += "* رابط تحميل الفيديو المباشر: [تحميل ملف الفيديو (MP4)](" + topic['video_url'] + ")\n\n---\n"
 
-    # الكتابة المباشرة والمضمونة باستخدام Pathlib
+    # الكتابة باستخدام utf-8 الصحيحة والمضبوطة
     file_path = Path("dashboard.md")
-    file_path.write_text(dashboard_content, encoding="utf
+    file_path.write_text(dashboard_content, encoding="utf-8")
+    
+    print("✨ تم كتابة وتحديث لوحة تحكم Qazo بنجاح!")
+
+if __name__ == "__main__":
+    generate_dashboard()
