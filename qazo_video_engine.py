@@ -2,7 +2,7 @@ import random
 from datetime import datetime
 from pathlib import Path
 
-# إعدادات روابط التسويق بالعمولة (Amazon Affiliate) ومواضيع Qazo
+# --- إعدادات إمبراطورية Qazo ---
 AFFILIATE_LINK = "https://amzn.to/qazo_gaming"
 
 GAME_TOPICS = [
@@ -23,29 +23,42 @@ GAME_TOPICS = [
     }
 ]
 
-def generate_dashboard():
-    selected_topics = random.sample(GAME_TOPICS, 2)
-    current_time = datetime.now().strftime('%Y-%m-%d | %I:%M %p')
+def build_qazo_empire():
+    print("🚀 جاري بدء تشغيل مصنع Qazo الشامل...")
     
-    dashboard_content = "# لوحة تحكم إمبراطورية Qazo\n"
-    dashboard_content += "> آخر تحديث: " + current_time + "\n"
-    dashboard_content += "> الحالة: جاهز للنشر اليدوي الآمن 🚀\n\n---\n"
-
-    for i, topic in enumerate(selected_topics, 1):
-        title = topic['title'] + " #Qazo"
-        description = "استكشف معنا أسرار وخبايا الألعاب الاحترافية!\n\nأدوات وتجهيزات الجيمنز (رابط العمولة):\n- أفضل رخص ومعدات الألعاب: " + AFFILIATE_LINK
+    # اختيار مقطعين عشوائيين
+    selected = random.sample(GAME_TOPICS, 2)
+    now_str = datetime.now().strftime('%Y-%m-%d | %I:%M %p')
+    
+    # بناء محتوى الداشبورد بالكامل بداخل متغير نصي ضخم
+    lines = []
+    lines.append("# لوحة تحكم إمبراطورية Qazo")
+    lines.append(f"> آخر تحديث: {now_str}")
+    lines.append("> الحالة: جاهز للنشر اليدوي الآمن 🚀\n")
+    lines.append("---")
+    
+    for idx, item in enumerate(selected, 1):
+        final_title = item['title'] + " #Qazo"
+        desc = (
+            "استكشف معنا أسرار وخبايا الألعاب الاحترافية!\n\n"
+            "أدوات وتجهيزات الجيمنز (رابط العمولة):\n"
+            f"- أفضل رخص ومعدات الألعاب: {AFFILIATE_LINK}"
+        )
         
-        dashboard_content += "\n### المقطع رقم " + str(i) + "\n"
-        dashboard_content += "* العنوان المقترح:\n  > `" + title + "`\n"
-        dashboard_content += "* الوصف ورابط الأفلييت:\n  ```text\n  " + description + "\n  ```\n"
-        dashboard_content += "* رابط الثمنيل (الصورة المصغرة): [عرض الصورة](" + topic['thumbnail'] + ")\n"
-        dashboard_content += "* رابط تحميل الفيديو المباشر: [تحميل ملف الفيديو (MP4)](" + topic['video_url'] + ")\n\n---\n"
-
-    # الكتابة باستخدام utf-8 الصحيحة والمضبوطة
-    file_path = Path("dashboard.md")
-    file_path.write_text(dashboard_content, encoding="utf-8")
+        lines.append(f"\n### المقطع رقم {idx}")
+        lines.append(f"* العنوان المقترح:\n  > `{final_title}`")
+        lines.append(f"* الوصف ورابط الأفلييت:\n  ```text\n  {desc}\n  ```")
+        lines.append(f"* رابط الثمنيل (الصورة المصغرة): [عرض الصورة]({item['thumbnail']})")
+        lines.append(f"* رابط تحميل الفيديو المباشر: [تحميل ملف الفيديو (MP4)]({item['video_url']})\n")
+        lines.append("---")
     
-    print("✨ تم كتابة وتحديث لوحة تحكم Qazo بنجاح!")
+    full_text = "\n".join(lines)
+    
+    # الكتابة المباشرة في ملف dashboard.md
+    target_file = Path("dashboard.md")
+    target_file.write_text(full_text, encoding="utf-8")
+    
+    print("✅ تم توليد وتعبئة ملف dashboard.md بالكامل بنجاح!")
 
 if __name__ == "__main__":
-    generate_dashboard()
+    build_qazo_empire()
